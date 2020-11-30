@@ -1,6 +1,4 @@
 import * as Alexa from 'ask-sdk-core';
-import { ExpressAdapter } from 'ask-sdk-express-adapter';
-import express from 'express';
 import { Launch } from './intents/Launch';
 import { Help } from './intents/Help';
 import { Stop } from './intents/Stop';
@@ -15,7 +13,7 @@ import { RequestInterceptor } from './interceptors/RequestInterceptor';
 import { ResponseInterceptor } from './interceptors/ResponseInterceptor';
 import * as ddbAdapter from 'ask-sdk-dynamodb-persistence-adapter';
 
-const tableName = 'trainQ-db';
+const tableName = 'xxx-db';
 
 function getPersistenceAdapter(tableName: string) {
 	// Not in Alexa Hosted Environment
@@ -46,14 +44,5 @@ exports.handler = async (event: RequestEnvelope, context: any) => {
 	const response = await skill.invoke(event, context);
 	return response;
 };
-
-  //////////////////////////////// App ////////////////////////////////
-
-// サーバー情報
-const PORT = 3000;
-const ENDPOINT = '/';
-
-const adapter = new ExpressAdapter(skill, false, false);
-express().post(ENDPOINT, adapter.getRequestHandlers()).listen(PORT);
 
 console.log('start!');
